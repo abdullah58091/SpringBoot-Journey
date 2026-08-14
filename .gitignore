@@ -1,0 +1,177 @@
+# =========================================================
+# Java
+# =========================================================
+
+# Compiled Java class files
+*.class
+
+# Java packaged files
+*.jar
+*.war
+*.ear
+
+# JVM crash logs
+hs_err_pid*
+replay_pid*
+
+
+# =========================================================
+# Maven
+# =========================================================
+
+# Maven build output
+target/
+
+# Maven wrapper
+.mvn/wrapper/maven-wrapper.jar
+
+# Maven release files
+release.properties
+
+# Maven generated files
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+
+
+# =========================================================
+# Spring Boot
+# =========================================================
+
+# Spring Boot generated build files
+spring-boot-starter/
+
+
+# =========================================================
+# IntelliJ IDEA
+# =========================================================
+
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+
+# =========================================================
+# Eclipse / STS
+# =========================================================
+
+.classpath
+.project
+.settings/
+.factorypath
+.apt_generated/
+.springBeans
+.sts4-cache/
+
+
+# =========================================================
+# NetBeans
+# =========================================================
+
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+
+# =========================================================
+# VS Code
+# =========================================================
+
+.vscode/
+
+
+# =========================================================
+# Gradle
+# =========================================================
+
+.gradle/
+build/
+
+# Gradle generated files
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+
+# =========================================================
+# Logs
+# =========================================================
+
+*.log
+logs/
+log/
+
+
+# =========================================================
+# OS Generated Files
+# =========================================================
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+
+# =========================================================
+# Environment / Secrets
+# =========================================================
+
+.env
+.env.*
+!.env.example
+
+# Local configuration files
+application-local.properties
+application-local.yml
+application-local.yaml
+
+# Secret configuration
+application-secret.properties
+application-secret.yml
+application-secret.yaml
+
+
+# =========================================================
+# Temporary Files
+# =========================================================
+
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+
+
+# =========================================================
+# Node / Frontend (if React/Node is added later)
+# =========================================================
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Frontend environment files
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+
+# =========================================================
+# Coverage / Testing
+# =========================================================
+
+coverage/
+*.lcov

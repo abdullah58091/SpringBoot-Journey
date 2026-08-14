@@ -1,0 +1,16 @@
+package com.example.myfirstProject;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class MyClass {
+
+
+    @GetMapping ("abc")
+    public String sayHello() {
+        return "welcome spring boot journey" + " " +
+                "POWER BY ABDULLAH";
+
+    }
+}
