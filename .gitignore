@@ -175,3 +175,22 @@ frontend/.env.*
 
 coverage/
 *.lcov
+
+# =========================================================
+# Environment / Secrets
+# =========================================================
+
+.env
+.env.*
+!.env.example
+
+# Spring Boot application configuration
+application.properties
+
+# Local configuration files
+application-local.properties
+application-local.yml
+application-local.yaml
+# Spring Boot application configuration
+application.properties
+application.yml

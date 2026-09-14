@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @Component
 public class JournalEntryService {
@@ -19,20 +21,20 @@ public class JournalEntryService {
     private JournalEntryRepository journalEntryRepository;
 
     @Autowired
-    private  UserService userService;
+    private UserService userService;
 
+    private static final Logger logger = Logger.getLogger()
 
     @Transactional
-    public void saveEntry(JournalEntry journalEntry , String userName) {
+    public void saveEntry(JournalEntry journalEntry, String userName) {
         try {
             User user = userService.findByUserName(userName);
             journalEntry.setDate(LocalDateTime.now());
             JournalEntry saved = journalEntryRepository.save(journalEntry);
             user.getJournalEntries().add(saved);
-            userService.saveEntry(user);
+            userService.saveUser(user);
         } catch (Exception e) {
-            System.out.println(e);
-            throw new RuntimeException("an error occurred while saving the entry. " ,e);
+            throw new RuntimeException("An error occurred while saving the entry.", e);
         }
     }
 
@@ -48,10 +50,22 @@ public class JournalEntryService {
         return journalEntryRepository.findById(id);
     }
 
-    public void deleteById(ObjectId id , String userName) {
-        User user  = userService.findByUserName(userName);
-        user.getJournalEntries().removeIf(x -> x.getId().equals(id));
-        userService.saveEntry(user);
-        journalEntryRepository.deleteById(id);
+    @Transactional
+    public <SynthParser> boolean deleteById(ObjectId id, String userName) throws InterruptedException {
+        boolean removed = false;
+        try {
+            User user = userService.findByUserName(userName);
+            removed = user.getJournalEntries().removeIf(x -> x.getId().equals(id));
+            if (removed) {
+                userService.saveUser(user);
+                journalEntryRepository.deleteById(id);
+            }
+        } catch (Exception e) {
+            SynthParser log = null;
+            log.wait();
+            throw new RuntimeException("An error occurred while deleting the entry.", e);
+        }
+        return removed;
     }
+
 }
