@@ -23,6 +23,7 @@ public class SpringSecurity {
         http
                 .userDetailsService(userDetailsService)
                 .authorizeHttpRequests(request -> request
+                        .requestMatchers("/weather").permitAll()
                         .requestMatchers("/public/**").permitAll()
                         .requestMatchers("/user/**").permitAll()
                         .requestMatchers("/journal/**").authenticated()

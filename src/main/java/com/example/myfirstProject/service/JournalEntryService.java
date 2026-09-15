@@ -23,7 +23,7 @@ public class JournalEntryService {
     @Autowired
     private UserService userService;
 
-    private static final Logger logger = Logger.getLogger()
+    //private static final Logger logger = Logger.getLogger();
 
     @Transactional
     public void saveEntry(JournalEntry journalEntry, String userName) {

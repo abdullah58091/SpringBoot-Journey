@@ -1,5 +1,7 @@
 package com.example.myfirstProject.controller;
 
+import com.example.myfirstProject.api.response.WeatherResponse;
+import com.example.myfirstProject.service.WeatherService;
 import com.example.myfirstProject.entity.User;
 import com.example.myfirstProject.repository.UserRepository;
 import com.example.myfirstProject.service.UserService;
@@ -25,7 +27,8 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-
+    @Autowired
+    private WeatherService weatherService;
 
     @PutMapping
     public ResponseEntity<?> updateUser(@RequestBody User user) {
@@ -45,15 +48,15 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-//    @GetMapping
-//    public ResponseEntity<?> greeting() {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        WeatherResponse weatherResponse = weatherService.getWeather("Mumbai");
-//        String greeting = "";
-//        if (weatherResponse != null) {
-//            greeting = ", Weather feels like " + weatherResponse.getCurrent().getFeelslike();
-//        }
-//        return new ResponseEntity<>("Hi " + authentication.getName() + greeting, HttpStatus.OK);
-//    }
+    @GetMapping
+    public ResponseEntity<?> greeting() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        WeatherResponse weatherResponse = weatherService.getWeather("Mumbai");
+        String greeting = "";
+        if (weatherResponse != null) {
+            greeting = ", Weather feels like " + weatherResponse.getCurrent().getFeelslike();
+        }
+        return new ResponseEntity<>("Hi " + authentication.getName() + greeting, HttpStatus.OK);
+    }
 
 }

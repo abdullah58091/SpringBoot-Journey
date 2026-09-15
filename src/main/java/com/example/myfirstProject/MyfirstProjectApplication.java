@@ -18,7 +18,7 @@ public class MyfirstProjectApplication {
 
          ConfigurableApplicationContext context =SpringApplication.run(MyfirstProjectApplication.class, args);
         ConfigurableEnvironment environment = context.getEnvironment();
-        System.out.println(environment.getActiveProfiles()[0]);
+        System.out.println(environment.getActiveProfiles());
 	}
 
 
