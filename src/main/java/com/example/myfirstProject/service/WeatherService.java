@@ -1,13 +1,14 @@
 package com.example.myfirstProject.service;
 
-
 import com.example.myfirstProject.api.response.WeatherResponse;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 @Service
 public class WeatherService {
@@ -18,25 +19,30 @@ public class WeatherService {
     @Value("${weather.api.url}")
     private String weatherApiUrl;
 
-    @Autowired
-    private RestTemplate restTemplate;
-/*
-    @Autowired
-    private AppCache appCache;
+    private final RestTemplate restTemplate;
 
-    @Autowired
-    private RedisService redisService;
-
- */
+    public WeatherService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     public WeatherResponse getWeather(String city) {
 
-        String finalAPI = weatherApiUrl.replace("{city}", city).replace("{apiKey}", apiKey);
+        URI finalAPI = UriComponentsBuilder
+                .fromUriString(weatherApiUrl)
+                .queryParam("access_key", apiKey)
+                .queryParam("query", city)
+                .build()
+                .encode()
+                .toUri();
 
         ResponseEntity<WeatherResponse> response =
-                restTemplate.exchange(finalAPI, HttpMethod.GET, null, WeatherResponse.class);
+                restTemplate.exchange(
+                        finalAPI,
+                        HttpMethod.GET,
+                        null,
+                        WeatherResponse.class
+                );
 
         return response.getBody();
     }
 }
-

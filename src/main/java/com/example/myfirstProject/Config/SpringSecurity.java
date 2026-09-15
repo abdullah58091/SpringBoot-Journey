@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+
 @Configuration
 @EnableWebSecurity
 public class SpringSecurity {
@@ -26,7 +27,6 @@ public class SpringSecurity {
                         .requestMatchers("/weather").permitAll()
                         .requestMatchers("/public/**").permitAll()
                         .requestMatchers("/user/**").permitAll()
-                        .requestMatchers("/journal/**").authenticated()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )

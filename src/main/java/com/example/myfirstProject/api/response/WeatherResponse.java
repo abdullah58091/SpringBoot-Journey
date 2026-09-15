@@ -1,6 +1,5 @@
 package com.example.myfirstProject.api.response;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,28 +9,22 @@ import java.util.List;
 @Setter
 public class WeatherResponse {
 
-    private String name;
-
-    private Main main;
-
-    private List<Weather> weather;
+    private Location location;
+    private Current current;
 
     @Getter
     @Setter
-    public static class Main {
-
-        private double temp;
-
-        @JsonProperty("feels_like")
-        private double feelsLike;
-
-        private int humidity;
+    public static class Location {
+        private String name;
+        private String country;
     }
 
     @Getter
     @Setter
-    public static class Weather {
-
-        private String description;
+    public static class Current {
+        private double temperature;
+        private double feelslike;
+        private int humidity;
+        private List<String> weather_descriptions;
     }
 }
