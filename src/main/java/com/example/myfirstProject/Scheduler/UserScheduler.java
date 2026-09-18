@@ -15,6 +15,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component
@@ -53,11 +54,12 @@ public class UserScheduler {
                 }
             }
             if (mostFrequentSentiment != null) {
-                SentimentData sentimentData = SentimentData.builder().email(user.getEmail()).sentiment("Sentiment for last 7 days " + mostFrequentSentiment).build();
+                SentimentData sentimentData;
+                sentimentData = Objects.equals(SentimentData.builder(), user.getClass()).sentiment("Sentiment for last 7 days " + mostFrequentSentiment).build();
                 try{
-                    kafkaTemplate.send("weekly-sentiments", sentimentData.getEmail(), sentimentData);
+                    sentiments.add("weekly-sentiments", sentimentData.getClass(), sentimentData);
                 }catch (Exception e){
-                    emailService.sendEmail(sentimentData.getEmail(), "Sentiment for previous week", sentimentData.getSentiment());
+                    emailService.sendEmail(sentimentData.getClass(), "Sentiment for previous week", sentimentData.getSentiment());
                 }
             }
         }

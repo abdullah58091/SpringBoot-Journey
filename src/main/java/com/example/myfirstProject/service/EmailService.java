@@ -1,5 +1,6 @@
 package com.example.myfirstProject.service;
 
+import com.example.myfirstProject.Scheduler.SentimentData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -26,4 +27,6 @@ public class EmailService {
     }
 
 
+    public void sendEmail(Class<? extends SentimentData> aClass, String sentimentForPreviousWeek, String sentiment) {
+    }
 }
