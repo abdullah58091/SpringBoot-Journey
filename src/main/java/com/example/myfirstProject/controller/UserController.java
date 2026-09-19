@@ -5,6 +5,7 @@ import com.example.myfirstProject.service.WeatherService;
 import com.example.myfirstProject.entity.User;
 import com.example.myfirstProject.repository.UserRepository;
 import com.example.myfirstProject.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
+@Tag(name = "User APIs ABDULLAH  BHAI ", description = "Read, Update & Delete User 2446")
 public class UserController {
 
     @Autowired
@@ -51,19 +53,12 @@ public class UserController {
     @GetMapping
     public ResponseEntity<?> greeting() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
         WeatherResponse weatherResponse = weatherService.getWeather("Mumbai");
-
         String greeting = "";
-
         if (weatherResponse != null) {
-            greeting = ", Weather feels like " +
-                    weatherResponse.getCurrent().getFeelslike();
+            greeting = ", Weather feels like " + weatherResponse.getCurrent().getFeelslike();
         }
-
-        return new ResponseEntity<>(
-                "Hi " + authentication.getName() + greeting,
-                HttpStatus.OK
-        );
+        return new ResponseEntity<>("Hi " + authentication.getName() + greeting, HttpStatus.OK);
     }
+
 }
